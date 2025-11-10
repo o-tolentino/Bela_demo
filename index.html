@@ -3,20 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galería de Casas</title>
+  <title>Configurador de Casa</title>
   <link rel="stylesheet" href="gallery.css">
 </head>
 <body>
-  <div class="gallery-container">
-    <header>
-      <h1>🏠 Galería de Casas</h1>
-      <div class="actions">
-        <button id="addHouse">➕ Agregar</button>
-        <button id="removeHouse">🗑️ Eliminar</button>
-      </div>
+  <div class="main-container">
+    <header class="header">
+      <h1 id="houseTitle">🏠 Casa - Lote </h1>
+      <p id="clientName"></p>
     </header>
 
-    <section id="gallery" class="gallery"></section>
+    <section class="house-demo">
+      <img id="houseImage" src="https://picsum.photos/900/400?random=1" alt="Vista de la casa" />
+    </section>
+
+    <section class="sections">
+      <div class="section">
+        <h2>📦 Paquetes</h2>
+        <div id="packages" class="cards-grid"></div>
+      </div>
+
+      <div class="section">
+        <h2>💡 Upgrades / Mejoras</h2>
+        <div id="upgrades" class="cards-grid"></div>
+      </div>
+    </section>
   </div>
 
   <script src="gallery.js"></script>

@@ -1,60 +1,84 @@
-const gallery = document.getElementById("gallery");
-const addBtn = document.getElementById("addHouse");
-const removeBtn = document.getElementById("removeHouse");
+// =======================
+// 🔹 Obtener parámetros de URL
+// =======================
+const params = new URLSearchParams(window.location.search);
+const lote = params.get("lote") || "N/A";
+const cliente = params.get("cliente") || "Sin nombre";
 
-let houseCount = 3;
+document.getElementById("houseTitle").textContent = `🏠 Casa - Lote ${lote}`;
+document.getElementById("clientName").textContent = `👤 Cliente: ${cliente}`;
 
-// Carga inicial
-const initialHouses = [
-  { title: "Casa Moderna", img: "https://picsum.photos/400/250?random=1", location: "Ciudad de México" },
-  { title: "Residencia Familiar", img: "https://picsum.photos/400/250?random=2", location: "Guadalajara" },
-  { title: "Casa de Campo", img: "https://picsum.photos/400/250?random=3", location: "Puebla" }
+// =======================
+// 🔹 Datos base
+// =======================
+const packages = [
+  { id: "pkg_basic", name: "Paquete Básico", desc: "Incluye acabados estándar y equipamiento esencial." },
+  { id: "pkg_premium", name: "Paquete Premium", desc: "Materiales de alta gama, aire acondicionado y domótica básica." },
+  { id: "pkg_luxury", name: "Paquete Luxury", desc: "Lujo total con domótica avanzada y jardín decorativo." }
 ];
 
-function renderGallery() {
-  gallery.innerHTML = "";
-  initialHouses.forEach((house, index) => {
+const upgrades = [
+  { id: "upg_panels", name: "Paneles Solares", desc: "Reduce tu consumo eléctrico hasta un 60%." },
+  { id: "upg_kitchen", name: "Cocina Integral", desc: "Diseño moderno con acabados premium." },
+  { id: "upg_closet", name: "Closets Personalizados", desc: "Optimiza tus espacios con diseño funcional." },
+  { id: "upg_garden", name: "Jardín Frontal", desc: "Dale un toque verde a tu hogar." }
+];
+
+// =======================
+// 🔹 Renderizado
+// =======================
+function renderSection(containerId, items, type) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+
+  items.forEach((item) => {
     const card = document.createElement("div");
-    card.classList.add("house-card");
+    card.classList.add("card");
+
     card.innerHTML = `
-      <img src="${house.img}" alt="${house.title}">
-      <div class="info">
-        <h2>${house.title}</h2>
-        <p>${house.location}</p>
+      <div>
+        <h3>${item.name}</h3>
+        <p>${item.desc}</p>
+      </div>
+      <div>
+        <button class="add-btn" data-id="${item.id}" data-type="${type}">➕ Add</button>
+        <button class="remove-btn" data-id="${item.id}" data-type="${type}" style="background:#dc3545;">🗑 Remove</button>
       </div>
     `;
-    gallery.appendChild(card);
+
+    container.appendChild(card);
   });
 }
 
-// Enviar eventos al parent (la página que hace el embed)
+renderSection("packages", packages, "package");
+renderSection("upgrades", upgrades, "upgrade");
+
+// =======================
+// 🔹 Comunicación con el parent
+// =======================
 function sendMessage(action, payload = {}) {
   window.parent.postMessage({ source: "gallery", action, payload }, "*");
 }
 
-addBtn.addEventListener("click", () => {
-  const newHouse = {
-    title: `Casa Nueva #${++houseCount}`,
-    img: `https://picsum.photos/400/250?random=${Math.floor(Math.random() * 1000)}`,
-    location: "Nuevo Ingreso"
-  };
-  initialHouses.push(newHouse);
-  renderGallery();
-  sendMessage("house_added", newHouse);
-});
+// Evento click para Add / Remove
+document.body.addEventListener("click", (e) => {
+  if (e.target.classList.contains("add-btn") || e.target.classList.contains("remove-btn")) {
+    const type = e.target.dataset.type;
+    const id = e.target.dataset.id;
+    const action = e.target.classList.contains("add-btn") ? `${type}Added` : `${type}Removed`;
+    const itemList = type === "package" ? packages : upgrades;
+    const item = itemList.find((i) => i.id === id);
 
-removeBtn.addEventListener("click", () => {
-  if (initialHouses.length === 0) return;
-  const removed = initialHouses.pop();
-  renderGallery();
-  sendMessage("house_removed", removed);
-});
-
-// Escucha de mensajes desde el parent (por ejemplo, para refrescar)
-window.addEventListener("message", (event) => {
-  if (event.data?.action === "refresh_gallery") {
-    renderGallery();
+    sendMessage(action, { lote, cliente, ...item });
   }
 });
 
-renderGallery();
+// =======================
+// 🔹 Escuchar mensajes del parent
+// =======================
+window.addEventListener("message", (event) => {
+  const { action } = event.data || {};
+  if (action === "refresh_gallery") {
+    location.reload();
+  }
+});
