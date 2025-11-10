@@ -6,7 +6,7 @@ body {
 }
 
 .main-container {
-  max-width: 1150px;
+  max-width: 80%;
   margin: 0 auto;
   padding: 20px;
 }
@@ -84,7 +84,7 @@ body {
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 20px;
-  display: flex;
+  /*display: flex;*/
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -216,4 +216,10 @@ body {
 
 .card button:hover {
   background: #005fa3;
+}
+
+
+.tabs-section
+{
+  width: 100%;
 }
