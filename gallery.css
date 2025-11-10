@@ -81,26 +81,66 @@ body {
 .house-info {
   flex: 1 1 35%;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.house-info:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
 }
 
 .house-info h2 {
   margin-top: 0;
+  font-size: 1.3rem;
+  color: #0078d7;
+  border-bottom: 2px solid #0078d7;
+  padding-bottom: 6px;
+  margin-bottom: 16px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 10px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8faff;
+  border-radius: 10px;
+  padding: 10px;
+  transition: background 0.2s ease;
+}
+
+.info-item:hover {
+  background: #eef5ff;
+}
+
+.icon {
+  font-size: 1.8rem;
   color: #0078d7;
 }
 
-.house-info ul {
-  list-style: none;
-  padding: 0;
+.info-text h4 {
   margin: 0;
+  font-size: 0.95rem;
+  color: #333;
 }
 
-.house-info li {
-  font-size: 1rem;
-  margin: 8px 0;
+.info-text p {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  color: #555;
 }
+
 
 /* --- Tabs --- */
 .tabs-header {

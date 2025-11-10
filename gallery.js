@@ -6,7 +6,7 @@ const lote = params.get("lote") || "N/A";
 const cliente = params.get("cliente") || "Sin nombre";
 
 document.getElementById("houseTitle").textContent = `🏠 Casa - Lote ${lote}`;
-document.getElementById("clientName").textContent = `👤 Cliente: ${cliente}`;
+document.getElementById("clientName").textContent = `👤 ${cliente}`;
 
 // =======================
 // 🔹 Galería
