@@ -9,12 +9,34 @@ document.getElementById("houseTitle").textContent = `🏠 Casa - Lote ${lote}`;
 document.getElementById("clientName").textContent = `👤 Cliente: ${cliente}`;
 
 // =======================
-// 🔹 Datos base
+// 🔹 Galería
+// =======================
+const galleryImages = [
+  "https://gpvivienda.com/wp-content/uploads/2023/09/modelo-inland-peninsula-park-living-fachada.webp",
+  "https://gpvivienda.com/wp-content/uploads/2023/09/fachada-casa-lujo-peninsula-park-living.webp",
+  "https://gpvivienda.com/wp-content/uploads/2023/09/sala-estar-lujo-peninsula-park-banner.webp",
+  "https://gpvivienda.com/wp-content/uploads/2023/09/casas-en-venta-cumbres-peninsula-park-living-control-acceso.webp"
+];
+
+const thumbsContainer = document.getElementById("thumbs");
+const mainImage = document.getElementById("mainImage");
+
+galleryImages.forEach((src) => {
+  const img = document.createElement("img");
+  img.src = src;
+  img.addEventListener("click", () => {
+    mainImage.src = src;
+  });
+  thumbsContainer.appendChild(img);
+});
+
+// =======================
+// 🔹 Datos
 // =======================
 const packages = [
-  { id: "pkg_basic", name: "Paquete Básico", desc: "Incluye acabados estándar y equipamiento esencial." },
-  { id: "pkg_premium", name: "Paquete Premium", desc: "Materiales de alta gama, aire acondicionado y domótica básica." },
-  { id: "pkg_luxury", name: "Paquete Luxury", desc: "Lujo total con domótica avanzada y jardín decorativo." }
+  { id: "pkg_basic", name: "Paquete Básico", desc: "Acabados estándar y equipamiento esencial." },
+  { id: "pkg_premium", name: "Paquete Premium", desc: "Materiales de alta gama y domótica básica." },
+  { id: "pkg_luxury", name: "Paquete Luxury", desc: "Lujo total con jardín decorativo y domótica avanzada." }
 ];
 
 const upgrades = [
@@ -54,6 +76,19 @@ renderSection("packages", packages, "package");
 renderSection("upgrades", upgrades, "upgrade");
 
 // =======================
+// 🔹 Tabs
+// =======================
+document.querySelectorAll(".tab-button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-button").forEach((b) => b.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach((c) => c.classList.remove("active"));
+
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.tab).classList.add("active");
+  });
+});
+
+// =======================
 // 🔹 Comunicación con el parent
 // =======================
 function sendMessage(action, payload = {}) {
@@ -73,12 +108,9 @@ document.body.addEventListener("click", (e) => {
   }
 });
 
-// =======================
-// 🔹 Escuchar mensajes del parent
-// =======================
+// Escuchar mensajes del parent
 window.addEventListener("message", (event) => {
-  const { action } = event.data || {};
-  if (action === "refresh_gallery") {
+  if (event.data?.action === "refresh_gallery") {
     location.reload();
   }
 });

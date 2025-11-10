@@ -1,106 +1,12 @@
 body {
   font-family: "Poppins", sans-serif;
   margin: 0;
-  background: #f4f6f8;
-  color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-.gallery-container {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  width: 90%;
-  max-width: 1000px;
-  padding: 20px;
-  overflow: hidden;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-h1 {
-  font-size: 1.6rem;
-  color: #0078d7;
-  margin: 0;
-}
-
-.actions button {
-  background: #0078d7;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 14px;
-  margin-left: 8px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.actions button:hover {
-  background: #005fa3;
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-  margin-top: 20px;
-}
-
-.house-card {
-  background: #fafafa;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  overflow: hidden;
-  transition: transform 0.2s ease;
-}
-
-.house-card:hover {
-  transform: translateY(-5px);
-}
-
-.house-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-}
-
-.house-card .info {
-  padding: 12px;
-}
-
-.house-card .info h2 {
-  margin: 0;
-  font-size: 1rem;
-  color: #333;
-}
-
-.house-card .info p {
-  margin-top: 4px;
-  color: #777;
-  font-size: 0.9rem;
-}
-
-
-
-/*New Code*/
-body {
-  font-family: "Poppins", sans-serif;
-  margin: 0;
   background: #f3f6f9;
   color: #333;
 }
 
 .main-container {
-  max-width: 1100px;
+  max-width: 1150px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -124,31 +30,113 @@ body {
   font-weight: 300;
 }
 
-.house-demo img {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.sections {
-  margin-top: 30px;
-}
-
-.section {
+/* --- Galería + Info --- */
+.house-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
   margin-bottom: 30px;
 }
 
-.section h2 {
-  margin-bottom: 10px;
+.house-gallery {
+  flex: 1 1 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-image {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.main-image img {
+  width: 100%;
+  display: block;
+}
+
+.thumbs {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.thumbs img {
+  width: 100px;
+  height: 70px;
+  border-radius: 8px;
+  cursor: pointer;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.thumbs img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.house-info {
+  flex: 1 1 35%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.house-info h2 {
+  margin-top: 0;
   color: #0078d7;
 }
 
-.cards-grid {
+.house-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.house-info li {
+  font-size: 1rem;
+  margin: 8px 0;
+}
+
+/* --- Tabs --- */
+.tabs-header {
+  display: flex;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 16px;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #555;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tab-button.active {
+  color: #0078d7;
+  border-bottom-color: #0078d7;
+  font-weight: bold;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 16px;
 }
 
+/* --- Cards --- */
 .card {
   background: white;
   border-radius: 12px;
