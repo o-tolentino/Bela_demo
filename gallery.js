@@ -34,16 +34,16 @@ galleryImages.forEach((src) => {
 // 🔹 Datos
 // =======================
 const packages = [
-  { id: "pkg_basic", name: "Paquete Básico", desc: "Acabados estándar y equipamiento esencial." },
-  { id: "pkg_premium", name: "Paquete Premium", desc: "Materiales de alta gama y domótica básica." },
-  { id: "pkg_luxury", name: "Paquete Luxury", desc: "Lujo total con jardín decorativo y domótica avanzada." }
+  { id: "a607x000001NrPdAAK", name: "Paquete Básico", desc: "Acabados estándar y equipamiento esencial." },
+  { id: "a607x000001NVDpAAO", name: "Paquete Premier", desc: "Materiales de alta gama y domótica básica." },
+  { id: "a607x000001NsDdAAK", name: "Paquete Aclimates", desc: "Mantente Fresco todo el tiempo con aire acondicionados" }
 ];
 
 const upgrades = [
-  { id: "upg_panels", name: "Paneles Solares", desc: "Reduce tu consumo eléctrico hasta un 60%." },
-  { id: "upg_kitchen", name: "Cocina Integral", desc: "Diseño moderno con acabados premium." },
-  { id: "upg_closet", name: "Closets Personalizados", desc: "Optimiza tus espacios con diseño funcional." },
-  { id: "upg_garden", name: "Jardín Frontal", desc: "Dale un toque verde a tu hogar." }
+  { id: "a5m5G000000t8nnQAA", name: "Muro Verde", desc: "bonito muro de decoracion" },
+  { id: "a5m5G000000t8nRQAQ", name: "Cocina", desc: "Diseño moderno con acabados premium." },
+  { id: "a5m5G000000oXr3QAE", name: "Mini split completo", desc: "paquete completo de mini stpplits" },
+  { id: "a5m5G000000t8ngQAA", name: "CLOSET RECAMARA PRINCIPAL", desc: "Hermoso walk-in closet para la recamara principal" }
 ];
 
 // =======================
@@ -92,7 +92,7 @@ document.querySelectorAll(".tab-button").forEach((btn) => {
 // 🔹 Comunicación con el parent
 // =======================
 function sendMessage(action, payload = {}) {
-  window.parent.postMessage({ source: "gallery", action, payload }, "*");
+  window.parent.postMessage({ source: "GPV_Cotizador", 'event':action, payload }, "*");
 }
 
 // Evento click para Add / Remove
